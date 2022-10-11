@@ -4,20 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DragAndDrop"
+        xmlns:views="clr-namespace:DragAndDrop.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Border BorderBrush="Black" BorderThickness="5">
-        <Canvas x:Name="DragCanvas" 
-                AllowDrop="True" 
-                Background="White" 
-                DragOver="Canvas_DragOver">
-            <Rectangle x:Name="RedRectangle"
-                       MouseMove="RedRectangle_MouseMove"
-                       Canvas.Left ="50"
-                       Canvas.Top="50"
-                       Width="50"
-                       Height="50"
-                       Fill="Red"/>
-        </Canvas>
-    </Border>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <views:Canvas Grid.Column="0" Color="Red"/>
+        <views:Canvas Grid.Column="1" Color="Blue"/>
+    </Grid>
 </Window>
