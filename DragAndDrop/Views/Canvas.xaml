@@ -12,12 +12,13 @@
                 AllowDrop="True" 
                 Background="White" 
                 DragOver="Canvas_DragOver"
-                DragLeave="Canvas_DragLeave">
+                DragLeave="Canvas_DragLeave"
+                Drop="Canvas_Drop">
             <Rectangle x:Name="Rectangle"
                        IsHitTestVisible="{Binding IsChildHitTestVisible, ElementName=Root}"
                        MouseMove="Rectangle_MouseMove"
-                       Canvas.Left ="50"
-                       Canvas.Top="50"
+                       Canvas.Left ="{Binding X, Mode=TwoWay}"
+                       Canvas.Top="{Binding Y, Mode=TwoWay}"
                        Width="50"
                        Height="50"
                        Fill="{Binding Color, ElementName=Root}"/>

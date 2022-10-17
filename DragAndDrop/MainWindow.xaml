@@ -10,10 +10,11 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
-        <views:Canvas Grid.Column="0" Color="Red"/>
-        <views:Canvas Grid.Column="1" Color="Blue"/>
+        
+        <views:Canvas Grid.Column="1" Color="Blue" 
+                      RectangleDropCommand="{Binding SaveRectangleCommand}"
+                      RectangleRemoveCommand="{Binding DeleteRectangleCommand}"
+                      RemoveRectangleName="{Binding RemoveRectangleName}"/>
     </Grid>
 </Window>

@@ -27,6 +27,32 @@ public partial class Canvas : UserControl
         set => SetValue(ColorProperty, value);
     }
 
+    public static readonly DependencyProperty RectangleDropCommandProperty =
+        DependencyProperty.Register(nameof(RectangleDropCommand), typeof(ICommand), typeof(Canvas), new PropertyMetadata(null));
+
+    public ICommand RectangleDropCommand
+    {
+        get => (ICommand)GetValue(RectangleDropCommandProperty);
+        set => SetValue(RectangleDropCommandProperty, value);
+    }
+
+    public static readonly DependencyProperty RectangleRemoveCommandProperty =
+        DependencyProperty.Register(nameof(RectangleRemoveCommand), typeof(ICommand), typeof(Canvas), new PropertyMetadata(null));
+    public ICommand RectangleRemoveCommand
+    {
+        get => (ICommand)GetValue(RectangleRemoveCommandProperty);
+        set => SetValue(RectangleRemoveCommandProperty, value);
+    }
+
+    public static readonly DependencyProperty RemoveRectangleNameProperty =
+        DependencyProperty.Register(nameof(RemoveRectangleName), typeof(string), typeof(Canvas), 
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+    public string RemoveRectangleName
+    {
+        get => (string)GetValue(RemoveRectangleNameProperty);
+        set => SetValue(RemoveRectangleNameProperty, value);
+    }
+
     public Canvas()
     {
         InitializeComponent();
@@ -67,9 +93,16 @@ public partial class Canvas : UserControl
 
         object? data = e.Data.GetData(DataFormats.Serializable);
 
-        if (data is UIElement element)
+        if (data is FrameworkElement element)
         {
             DragCanvas.Children.Remove(element);
+            RemoveRectangleName = element.Name;
+            RectangleRemoveCommand?.Execute(null);
         }
+    }
+
+    private void Canvas_Drop(object sender, DragEventArgs e)
+    {
+        RectangleDropCommand?.Execute(null);
     }
 }
